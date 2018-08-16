@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Freshwork App</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../style/style.css" rel="stylesheet">
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/script/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="/script/anime.min.js"></script>
+	<script type="text/javascript" src="/script/report.js"></script>
+   
+  </head>
+
+  <body>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Freshwork Duck Data App</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="/">Home</a></li>
+                  <li class="active"><a href="">Report</a></li>
+                </ul>
+              </nav>
+            </div>
+               
+          </div>
+          <div class="inner">
+              <div class="container">
+                 <div class="row">
+                    <div class="col-md-3">
+                        <button onclick="generateFeedTable()" id="generate_record" type="submit" value="submit" class="btn btn-primary">Generate Feeding Record</button>
+                    </div>
+                     <!-- Search form -->
+                    <div class="col-md-9">
+                    <form class="form-inline ">
+                        <input id="searchfield" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search Feeder Name" aria-label="Search">
+                     <i onclick="searchName()" class="fa fa-search search_icon" aria-hidden="true"></i>
+                    </form>
+                     </div>
+                 </div>
+                  
+              </div>
+            </div>
+          <div class="inner table-cover">
+             <h1>Results Feeding Table</h1>
+                <div class="tbl-header">
+                    <table id="feeder" cellpadding="0" cellspacing="0" border="0">
+                      <thead>
+                        <tr class="table-header">
+                          <th>index</th>
+                          <th>Time</th>
+                          <th>Location</th>
+                          <th>count</th>
+                          <th>Name</th>
+                        </tr>
+                      </thead>
+                      
+                    </table>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="decor decor-bottomcenter"><img src="assets/Down-Chevron.svg" alt=""></div>
+<div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+              <div class="inner">
+                     <div class="row">
+                        <div class="col-md-3">
+                            <button onclick="generateFoodTable()" id="generate_food" type="submit" value="submit" class="btn btn-primary">Generate Food Record</button>
+                        </div>
+                     </div>
+               </div>
+              <div class="inner table-cover">
+                 <h1>Results Food Table</h1>
+                    <div class="tbl-header">
+                        <table id="food" cellpadding="0" cellspacing="0" border="0">
+                          <thead>
+                            <tr>
+                              <th>index</th>
+                              <th>Food Kind</th>
+                              <th>Quantity</th>
+                            </tr>
+                          </thead>
+
+                        </table>
+                    </div>
+              </div>    
+            </div>
+        </div>
+</div>
+<div class="decor decor-bottomcenter"><img src="assets/Down-Chevron.svg" alt=""></div>
+<div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+              <div class="inner">
+                     <div class="row">
+                        <div class="col-md-3">
+                            <button onclick="generateAll()" id="generateFullRecord" type="submit" value="submit" class="btn btn-primary">Generate Full Record</button>
+                        </div>
+                     </div>
+               </div>
+              <div class="inner table-cover">
+                 <h1>Full Results Table</h1>
+                    <div class="tbl-header">
+                        <table id="results" cellpadding="0" cellspacing="0" border="0">
+                          <thead>
+                            <tr>
+                              <th>index</th>
+                              <th>Time</th>
+                              <th>Location</th>
+                              <th>count</th>
+                              <th>Name</th>
+                              <th>Food Kind</th>
+                              <th>Quantity</th>
+                            </tr>
+                          </thead>
+
+                        </table>
+                    </div>
+              </div>    
+            </div>
+        </div>
+</div>
+
+</body>
