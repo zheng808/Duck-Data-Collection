@@ -7,8 +7,8 @@ var duck = require('./script/duck.js');
 const mysql = require('mysql');
 var http = require('http');
 
-//use ejs view engine for table page
-app.set('view engine', 'ejs');
+////use ejs view engine for table page
+//app.set('view engine', 'ejs');
 
 var HOST = 'localhost';
 var USER = 'root';
@@ -18,13 +18,25 @@ var DUCKTABLE = 'feeding_record';
 var FODDTABLE = 'food';
 var FEEDERTABLE = 'feeder';
 
+//heroku config
+/*
+var HOST = 'us-cdbr-iron-east-01.cleardb.net';
+var USER = 'b22905eabb7105';
+var PASSWORD = 'e30bcfa4';
+var DB = 'heroku_e292ecc7552cf76'
+var DUCKTABLE = 'feeding_record';
+var FODDTABLE = 'food';
+var FEEDERTABLE = 'feeder';
+*/
+
 //add all directroies;
 app.use('/style',  express.static(__dirname + '/style'));
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use('/script',  express.static(__dirname + '/script'));
 app.use('/assets',  express.static(__dirname + '/assets'));
 
-
+//heroku env port
+//var port = process.env.PORT || 8080;
 server.listen(8000,function(){
     console.log('Node server running @ http://localhost:8000');
 });
@@ -115,6 +127,7 @@ app.post('/feederName', urlencodedParser, function(req, res, ) {
         console.log(result);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(result));
+        
     });  
 
 })
@@ -143,25 +156,35 @@ app.post('/record', urlencodedParser, function (req, res) {
 })
 
 //setup database
-const connection = mysql.createConnection({
+var config = {
   host: HOST,
   user: USER,
   password: PASSWORD,
   multipleStatements: true,
   database: DB
-});
+};
 
-function connectDB(){
-    connection.connect(function(err) {
-        if (err) {
-            console.error('Error connecting: ' + err.stack);
-            return;
-        }
-    });
+//handle heroku db timeout
+function db_connection() {
+  //Recreate the connection, since the old one cannot be reused
+  connection = mysql.createConnection(config); 
+  connection.connect(function(err) {              
+    if(err) {                                     
+      console.log('error when connecting to db:', err);
+      setTimeout(handleDisconnect, 2000); 
+    }                                     
+  });                                    
+  connection.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+      db_connection();                         
+    } else {                                      
+      throw err;                                  
+    }
+  });
 }
 
-//connect db
-connectDB();
+db_connection();
 
 //insert data
 function executeInsert(duck, food){ 
